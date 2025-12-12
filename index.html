@@ -371,6 +371,7 @@
       let bestScore = 0;
       let lastTime = null;
       let spawnTimer = 0;
+      let nextSpawnInterval = 0;
 
       const gravity = 0.8;
       const groundLevel = 76;
@@ -386,11 +387,17 @@
         overlay.classList.toggle('show', visible);
       }
 
+      function getSpawnInterval() {
+        const base = Math.max(42 - score * 0.005, 28); // keep current minimum
+        return base + Math.random() * 12; // add some randomness
+      }
+
       function resetGame() {
         obstacles.forEach(o => o.el.remove());
         obstacles = [];
         score = 0;
         spawnTimer = 0;
+        nextSpawnInterval = getSpawnInterval();
         velocity = 0;
         positionY = 0;
         mario.style.transform = 'translateY(0)';
@@ -469,9 +476,10 @@
         // Spawn & move pipes
         spawnTimer += delta;
         const speed = 4 + Math.min(score / 400, 3);
-        if (spawnTimer > Math.max(42 - score * 0.005, 28)) {
+        if (spawnTimer > nextSpawnInterval) {
           spawnPipe();
           spawnTimer = 0;
+          nextSpawnInterval = getSpawnInterval();
         }
 
         obstacles = obstacles.filter(obj => {
