@@ -372,7 +372,7 @@
       let lastTime = null;
       let spawnTimer = 0;
 
-      const gravity = 0.9;
+      const gravity = 0.8;
       const groundLevel = 76;
 
       const formatScore = (val) => String(Math.floor(val)).padStart(4, '0');
@@ -433,7 +433,7 @@
         }
         if (isJumping) return;
         isJumping = true;
-        velocity = -15;
+        velocity = -16;
         mario.style.filter = 'brightness(1.1)';
         setTimeout(() => mario.style.filter = 'none', 150);
       }
@@ -468,8 +468,8 @@
 
         // Spawn & move pipes
         spawnTimer += delta;
-        const speed = 7 + Math.min(score / 180, 7);
-        if (spawnTimer > Math.max(18 - score * 0.015, 12)) {
+        const speed = 5 + Math.min(score / 240, 4);
+        if (spawnTimer > Math.max(24 - score * 0.01, 16)) {
           spawnPipe();
           spawnTimer = 0;
         }
