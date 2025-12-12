@@ -468,8 +468,8 @@
 
         // Spawn & move pipes
         spawnTimer += delta;
-        const speed = 5 + Math.min(score / 240, 4);
-        if (spawnTimer > Math.max(24 - score * 0.01, 16)) {
+        const speed = 5 + Math.min(score / 260, 4);
+        if (spawnTimer > Math.max(30 - score * 0.008, 20)) {
           spawnPipe();
           spawnTimer = 0;
         }
